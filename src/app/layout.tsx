@@ -31,7 +31,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={` font-sans antialiased`}>
+      <body>
         <MantineProvider theme={theme}>{children}</MantineProvider>
       </body>
     </html>
