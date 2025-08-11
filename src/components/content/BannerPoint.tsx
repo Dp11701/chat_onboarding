@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { easeOut } from "framer-motion";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Typography } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 
 function BannerPoint() {
   const [activeTab, setActiveTab] = useState(0);
-  const [prompt, setPrompt] = useState(
-    "Create a basketball team logo with the brand name Thunder"
-  );
+
   const sliderRef = useRef<Slider>(null);
+  const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const tabs = [
     { id: "chat", label: "Chat AI" },
@@ -30,6 +30,7 @@ function BannerPoint() {
       image:
         "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop",
       color: "from-blue-500 to-purple-600",
+      video: "/assets/mp4/intro.mp4",
     },
     {
       id: "logo",
@@ -38,6 +39,7 @@ function BannerPoint() {
       image:
         "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop",
       color: "from-green-500 to-teal-600",
+      video: "/assets/mp4/thunder.mp4",
     },
     {
       id: "avatar",
@@ -46,6 +48,7 @@ function BannerPoint() {
       image:
         "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&h=600&fit=crop",
       color: "from-pink-500 to-red-600",
+      video: "/assets/mp4/thunder.mp4",
     },
   ];
 
@@ -57,18 +60,6 @@ function BannerPoint() {
       transition: {
         duration: 0.6,
         ease: easeOut,
-      },
-    },
-  };
-
-  const inputVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        delay: 0.2,
       },
     },
   };
@@ -103,11 +94,10 @@ function BannerPoint() {
     dots: false,
     arrows: false,
     infinite: true,
-    speed: 500,
+    speed: 600,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
+    autoplay: false,
     fade: true,
     cssEase: "ease-in-out",
     beforeChange: (current: number, next: number) => {
@@ -122,29 +112,55 @@ function BannerPoint() {
     }
   };
 
+  useEffect(() => {
+    videoRefs.current.forEach((videoEl, index) => {
+      if (!videoEl) return;
+      if (index === activeTab) {
+        try {
+          videoEl.currentTime = 0;
+          const playPromise = videoEl.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {});
+          }
+        } catch {}
+      } else {
+        try {
+          videoEl.pause();
+        } catch {}
+      }
+    });
+  }, [activeTab]);
+
+  useEffect(() => {
+    const currentVideo = videoRefs.current[activeTab];
+    if (!currentVideo) return;
+
+    const handleEnded = () => {
+      const nextIndex = (activeTab + 1) % slides.length;
+      if (sliderRef.current) {
+        sliderRef.current.slickGoTo(nextIndex);
+      } else {
+        setActiveTab(nextIndex);
+      }
+    };
+
+    currentVideo.addEventListener("ended", handleEnded);
+    return () => {
+      currentVideo.removeEventListener("ended", handleEnded);
+    };
+  }, [activeTab, slides.length]);
+
   return (
     <motion.div
-      className="col-span-8 bg-transparent flex items-center  flex-col h-[100vh] overflow-y-hidden gap-4"
+      className={
+        "bg-transparent flex items-center py-12 flex-col overflow-y-auto gap-4 w-full " +
+        (isMobile ? "" : "col-span-8 h-[100vh]")
+      }
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <div className="max-w-4xl w-full  rounded-2xl p-8 ">
-        {/* Header */}
-        <motion.div
-          className="mb-8"
-          variants={inputVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <Typography className="block text-white text-[20px] font-[400] leading-[32px] text-center mb-3">
-            ENTER PROMPT
-          </Typography>
-          <Typography className="font-[500] text-[28px] leading-[32px] text-center text-white">
-            Create a basketball team logo with the brand name Thunder
-          </Typography>
-        </motion.div>
-
+      <div className="md:max-w-4xl w-full  rounded-2xl md:p-8 p-4 ">
         {/* Slider Container */}
         <motion.div
           className="relative mb-8 bg-[#0A0F0D] rounded-xl p-8 min-h-[400px] overflow-hidden"
@@ -153,19 +169,21 @@ function BannerPoint() {
           animate="visible"
         >
           <Slider ref={sliderRef} {...sliderSettings}>
-            {slides.map((slide) => (
+            {slides.map((slide, index) => (
               <div
                 key={slide.id}
-                className="relative h-[400px] rounded-lg overflow-hidden"
+                className="relative  rounded-lg overflow-hidden"
               >
                 <video
                   className="w-full h-full  rounded-lg"
                   autoPlay
-                  loop
                   muted
                   playsInline
+                  ref={(el) => {
+                    videoRefs.current[index] = el;
+                  }}
                 >
-                  <source src="/assets/mp4/thunder.mp4" type="video/mp4" />
+                  <source src={slide.video} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -186,7 +204,7 @@ function BannerPoint() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleTabClick(index)}
-                className={`flex-1 py-4 px-6 rounded-[16px] text-[24px] leading-[32px] transition-all duration-300 ${
+                className={`flex-1 py-4 md:px-6 rounded-[16px] md:text-[24px] text-[14px] md:leading-[32px] leading-[20px] transition-all duration-300 ${
                   activeTab === index
                     ? "bg-gradient-to-r from-[#26B77D] to-[#00B0A7] text-white shadow-lg"
                     : "bg-[#2A2F2D] text-gray-300 hover:bg-[#3A3F3D]"

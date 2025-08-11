@@ -109,7 +109,7 @@ function Rating() {
 
   return (
     <motion.div
-      className="col-span-8 bg-transparent flex items-center  flex-col h-[100vh] overflow-hidden gap-4"
+      className="col-span-8 bg-transparent flex items-center  flex-col h-[100vh] overflow-y-auto overflow-x-hidden gap-4"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
