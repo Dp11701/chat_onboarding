@@ -54,6 +54,7 @@ export default function OnboardingPage() {
 
   const [step, setStep] = useState(1);
   const isMobile = useMediaQuery("(max-width: 768px)");
+
   const handleNextStep = () => {
     if (step === 3) {
       window.open(
@@ -68,33 +69,26 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className=" bg-[#0A0F0D] overflow-hidden h-screen flex flex-col justify-between">
-      <div
-        className={
-          isMobile
-            ? "flex flex-col-reverse h-full bg-[#0A0F0D] overflow-hidden"
-            : "grid grid-cols-12 h-full bg-[#0A0F0D] overflow-hidden"
-        }
-      >
-        {/* Left Column */}
+    <div className="bg-[#0A0F0D] overflow-hidden h-screen flex flex-co justify-between">
+      <div className="flex flex-col-reverse md:grid md:grid-cols-12 h-full bg-[#0A0F0D] overflow-hidden">
+        {/* Left Column - Responsive layout với CSS */}
         <div
-          className="w-full col-span-4 bg-cover bg-center bg-no-repeat px-20 py-10 flex flex-col items-center"
+          className="w-full md:col-span-4 bg-cover bg-center bg-no-repeat px-6 md:px-20 py-6 md:py-10 flex flex-col items-center"
           style={{ backgroundImage: `url(${BackGroundLeft.src})` }}
         >
-          <div className="flex flex-col items-start justify-between md:!h-[60vh]">
-            {!isMobile && (
-              <div className="flex items-center gap-0 mb-auto pt-4 justify-start">
-                <div className="bg-black rounded-xl p-3">
-                  <Image src={LogoIcon} alt="logo" width={36} height={36} />
-                </div>
-                <p className="text-[28px] leading-[32px] font-bold text-white tracking-tight">
-                  AI Chatbot
-                </p>
+          <div className="flex flex-col items-start justify-between md:h-[60vh]">
+            {/* Logo - Hidden on mobile với CSS */}
+            <div className="hidden md:flex items-center gap-0 mb-auto pt-4 justify-start">
+              <div className="bg-black rounded-xl p-3">
+                <Image src={LogoIcon} alt="logo" width={36} height={36} />
               </div>
-            )}
+              <p className="text-[28px] leading-[32px] font-bold text-white tracking-tight">
+                AI Chatbot
+              </p>
+            </div>
 
             {/* Center Content */}
-            <div className="flex flex-col items-center md:items-start ">
+            <div className="flex flex-col items-center md:items-start">
               {/* Title */}
               <span className="text-[22px] md:text-[34px] leading-[34px] md:leading-[54px] text-white text-center font-bold mb-2">
                 {step === 1 && "Integrated All-In-One AI App Suite"}
@@ -110,7 +104,7 @@ export default function OnboardingPage() {
               {/* Button */}
               <button
                 onClick={handleNextStep}
-                className="relative flex items-center justify-center text-white font-medium !bg-gradient-to-r from-[#26B77D] to-[#00B0A7] px-3 md:py-5 py-3 rounded-[16px] shadow-[0_0_20px_#10A46940] min-w-[300px] md:min-w-[320px] "
+                className="relative flex items-center justify-center text-white font-medium !bg-gradient-to-r from-[#26B77D] to-[#00B0A7] px-3 py-3 md:py-5 rounded-[16px] shadow-[0_0_20px_#10A46940] min-w-[300px] md:min-w-[320px]"
               >
                 <span className="text-center font-600 text-[18px] md:text-[22px] leading-[28px] md:leading-[32px] w-full">
                   {step === 1 && "Get Started"}
@@ -129,104 +123,77 @@ export default function OnboardingPage() {
           </div>
         </div>
 
-        {/* Right Column */}
-        {step === 1 && (
-          <motion.div
-            className={
-              "bg-transparent flex items-center py-20 flex-col overflow-y-auto gap-4 w-full " +
-              (isMobile ? "" : "col-span-8 h-[100vh]")
-            }
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {isMobile ? (
-              <OnboardingMobile />
-            ) : (
-              <>
-                {/* row 1 */}
-                <div className="flex w-full gap-4 px-20">
-                  {/* Ảnh 1: ~39% */}
-                  <motion.div
-                    className="w-[39%] h-auto"
-                    variants={imageVariants}
-                  >
-                    <Image src={AILogo} alt="AI Logo" />
-                  </motion.div>
+        {/* Right Column - Desktop content */}
+        <div className="hidden md:block md:col-span-8">
+          {step === 1 && (
+            <motion.div
+              className="bg-transparent flex items-center py-20 flex-col overflow-y-auto gap-4 w-full h-[100vh]"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {/* row 1 */}
+              <div className="flex w-full gap-4 px-20">
+                <motion.div className="w-[39%] h-auto" variants={imageVariants}>
+                  <Image src={AILogo} alt="AI Logo" />
+                </motion.div>
+                <motion.div className="w-[61%] h-auto" variants={imageVariants}>
+                  <Image src={AskWithPic} alt="Ask With Pic" />
+                </motion.div>
+              </div>
 
-                  {/* Ảnh 2: ~61% */}
-                  <motion.div
-                    className="w-[61%] h-auto"
-                    variants={imageVariants}
-                  >
-                    <Image src={AskWithPic} alt="Ask With Pic" />
-                  </motion.div>
-                </div>
+              {/* row 2 */}
+              <div className="flex w-full gap-4 px-20">
+                <motion.div className="w-[50%] h-auto" variants={imageVariants}>
+                  <Image src={AIVoice} alt="AI Voice" />
+                </motion.div>
+                <motion.div className="w-[50%] h-auto" variants={imageVariants}>
+                  <Image src={chatWithAI} alt="Chat With AI" />
+                </motion.div>
+              </div>
 
-                {/* row 2 */}
-                <div className="flex w-full gap-4 px-20">
-                  {/* Ảnh 1: ~50% */}
-                  <motion.div
-                    className="w-[50%] h-auto"
-                    variants={imageVariants}
-                  >
-                    <Image src={AIVoice} alt="AI Voice" />
-                  </motion.div>
+              {/* row 3 */}
+              <div className="flex w-full gap-4 px-20">
+                <motion.div
+                  className="w-[100%] h-auto"
+                  variants={imageVariants}
+                >
+                  <Image src={topicChat} alt="Topic Chat" />
+                </motion.div>
+              </div>
 
-                  {/* Ảnh 2: ~50% */}
-                  <motion.div
-                    className="w-[50%] h-auto"
-                    variants={imageVariants}
-                  >
-                    <Image src={chatWithAI} alt="Chat With AI" />
-                  </motion.div>
-                </div>
+              {/* row 4 */}
+              <div className="flex w-full gap-4 px-20">
+                <motion.div className="w-[50%] h-auto" variants={imageVariants}>
+                  <Image src={webSearch} alt="Web Search" />
+                </motion.div>
+                <motion.div className="w-[50%] h-auto" variants={imageVariants}>
+                  <Image src={AIKeyboard} alt="AI Keyboard" />
+                </motion.div>
+              </div>
 
-                {/* row 3 */}
-                <div className="flex w-full gap-4 px-20">
-                  <motion.div
-                    className="w-[100%] h-auto"
-                    variants={imageVariants}
-                  >
-                    <Image src={topicChat} alt="Topic Chat" />
-                  </motion.div>
-                </div>
+              {/* row 5 */}
+              <div className="flex w-full gap-4 px-20">
+                <motion.div
+                  className="w-[100%] h-auto"
+                  variants={imageVariants}
+                >
+                  <Image src={imageGenerate} alt="Image Generate" />
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
 
-                {/* row 4 */}
-                <div className="flex w-full gap-4 px-20">
-                  {/* Ảnh 1: ~50% */}
-                  <motion.div
-                    className="w-[50%] h-auto"
-                    variants={imageVariants}
-                  >
-                    <Image src={webSearch} alt="Web Search" />
-                  </motion.div>
+          {step === 2 && <BannerPoint />}
+          {step === 3 && <Rating />}
+        </div>
 
-                  {/* Ảnh 2: ~50% */}
-                  <motion.div
-                    className="w-[50%] h-auto"
-                    variants={imageVariants}
-                  >
-                    <Image src={AIKeyboard} alt="AI Keyboard" />
-                  </motion.div>
-                </div>
-
-                {/* row 5 */}
-                <div className="flex w-full gap-4 px-20">
-                  <motion.div
-                    className="w-[100%] h-auto"
-                    variants={imageVariants}
-                  >
-                    <Image src={imageGenerate} alt="Image Generate" />
-                  </motion.div>
-                </div>
-              </>
-            )}
-          </motion.div>
-        )}
-
-        {step === 2 && <BannerPoint />}
-        {step === 3 && (isMobile ? <MobileLaurelIntro /> : <Rating />)}
+        {/* Mobile Content - Hiển thị với CSS responsive */}
+        <div className=" md:hidden w-full flex items-center justify-center h-full">
+          {step === 1 && <OnboardingMobile />}
+          {step === 2 && <BannerPoint />}
+          {step === 3 && <MobileLaurelIntro />}
+        </div>
       </div>
     </div>
   );

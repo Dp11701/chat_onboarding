@@ -5,19 +5,24 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Laurel from "../../assets/images/Laurel.png";
 import SliderComponentMobile from "./SliderComponentMobile";
+import GooglePlay from "../../assets/icons/icGooglePlay.svg";
+import AppStore from "../../assets/icons/icAppStore.svg";
+import { Typography } from "@mantine/core";
 
 export default function ThreeStepAnim() {
-  const [step, setStep] = useState(1);
+  const [phase, setPhase] = useState<
+    "big" | "small" | "showStep2" | "showStep3"
+  >("big");
 
   useEffect(() => {
     const timers = [
-      setTimeout(() => setStep(2), 1500),
-      setTimeout(() => setStep(3), 3000),
+      setTimeout(() => setPhase("small"), 1600),
+      setTimeout(() => setPhase("showStep2"), 2300),
+      setTimeout(() => setPhase("showStep3"), 5000),
     ];
-    return () => timers.forEach((t) => clearTimeout(t));
+    return () => timers.forEach(clearTimeout);
   }, []);
 
-  // Split reviews into two rows
   const firstRowReviews = [
     {
       title: "Fantastic Experience!",
@@ -39,74 +44,99 @@ export default function ThreeStepAnim() {
     },
   ];
 
-  const secondRowReviews = [
-    {
-      title: "Great Support",
-      content:
-        "Customer support was quick and solved my problem within minutes. Great service!",
-      author: "Bob Johnson",
-    },
-    {
-      title: "Love the Design",
-      content:
-        "The UI is beautiful and user friendly. A pleasure to use every day.",
-      author: "Charles Lee",
-    },
-    {
-      title: "User Friendly",
-      content:
-        "I was able to get started right away without any tutorials. Very intuitive.",
-      author: "Diana Prince",
-    },
-  ];
-
-  const containerStyle = "flex items-center justify-center h-screen w-full";
-
   return (
-    <div className={containerStyle}>
-      <AnimatePresence mode="wait">
-        {step === 1 && (
-          <motion.div
-            key="step1"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col items-center"
-          >
-            <Image src={Laurel} alt="Step 1" width={100} height={100} />
-          </motion.div>
-        )}
+    <motion.div
+      className="flex flex-col items-center justify-center h-screen w-full overflow-hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
+      {/* Laurel Image */}
+      <motion.div
+        layout
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{
+          scale: phase === "big" ? 1 : 0.7,
+          y: phase === "big" ? 0 : -0,
+          opacity: 1,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 60,
+          damping: 20,
+        }}
+      >
+        <Image src={Laurel} alt="Laurel" width={500} height={500} priority />
+      </motion.div>
 
-        {step === 2 && (
+      {/* Content */}
+      <AnimatePresence mode="wait">
+        {phase === "showStep2" && (
           <motion.div
             key="step2"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center justify-start"
+            initial={{ opacity: 0, y: 50, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -40, filter: "blur(8px)" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
           >
-            <Image src={Laurel} alt="Step 2" width={300} height={300} />
-          </motion.div>
-        )}
+            <Typography className="text-[#E2E2E2] text-[32px] font-[600] leading-[48px] my-6 text-center">
+              Available on
+            </Typography>
 
-        {step === 3 && (
-          <motion.div
-            key="step3"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col items-center gap-8"
-          >
-            <Image src={Laurel} alt="Laurel" width={300} height={300} />
-            <div className="w-full max-w-lg">
-              <SliderComponentMobile slides={firstRowReviews} />
+            <div className="flex items-center justify-center gap-6">
+              <StoreButton
+                icon={AppStore}
+                labelTop="Download on the"
+                labelBottom="App Store"
+              />
+              <StoreButton
+                icon={GooglePlay}
+                labelTop="Get it on"
+                labelBottom="Google Play"
+              />
             </div>
           </motion.div>
         )}
+
+        {phase === "showStep3" && (
+          <motion.div
+            key="step3"
+            className="mt-6 w-full max-w-lg"
+            initial={{ opacity: 0, y: 50, filter: "blur(8px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: -40, filter: "blur(8px)" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
+            <SliderComponentMobile slides={firstRowReviews} />
+          </motion.div>
+        )}
       </AnimatePresence>
-    </div>
+    </motion.div>
+  );
+}
+
+function StoreButton({
+  icon,
+  labelTop,
+  labelBottom,
+}: {
+  icon: string;
+  labelTop: string;
+  labelBottom: string;
+}) {
+  return (
+    <motion.button
+      className="flex items-center gap-3 px-6 py-3 rounded-xl bg-[linear-gradient(to_bottom_left,_#2BB4A599_0%,_#2A373A99_100%)] backdrop-blur-sm"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ duration: 0.2 }}
+    >
+      <Image src={icon} alt={labelBottom} width={40} height={40} />
+      <div className="flex flex-col items-start">
+        <span className="text-[#9E9E9F] text-sm">{labelTop}</span>
+        <span className="text-white text-xl font-medium">{labelBottom}</span>
+      </div>
+    </motion.button>
   );
 }
