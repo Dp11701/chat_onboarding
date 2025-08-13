@@ -48,7 +48,7 @@ function BannerPoint() {
       image:
         "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&h=600&fit=crop",
       color: "from-pink-500 to-red-600",
-      video: "/assets/mp4/thunder.mp4",
+      video: "/assets/mp4/logo3.mp4",
     },
   ];
 
@@ -153,17 +153,17 @@ function BannerPoint() {
   return (
     <motion.div
       className={
-        "bg-transparent flex items-center py-12 flex-col overflow-y-auto gap-4 w-full " +
-        (isMobile ? "" : "col-span-8 h-[100vh]")
+        "bg-transparent flex items-center md:py-2 flex-col overflow-y-auto gap-4 w-full " +
+        (isMobile ? "pb-10" : "col-span-8 h-[100vh]")
       }
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <div className="md:max-w-4xl w-full  rounded-2xl md:p-8 p-4 ">
+      <div className="md:max-w-4xl w-full  rounded-2xl md:p-8">
         {/* Slider Container */}
         <motion.div
-          className="relative mb-8 bg-[#0A0F0D] rounded-xl p-8 min-h-[400px] overflow-hidden"
+          className="relative mb-8 bg-[#0A0F0D] rounded-xl md:p-8 min-h-[400px] overflow-hidden"
           variants={slideVariants}
           initial="hidden"
           animate="visible"
@@ -172,10 +172,10 @@ function BannerPoint() {
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
-                className="relative  rounded-lg overflow-hidden"
+                className="relative md:rounded-[56px] overflow-hidden md:border-2 md:border-[#212627] "
               >
                 <video
-                  className="w-full h-full  rounded-lg"
+                  className="w-[110%] h-[110%]  rounded-lg"
                   autoPlay
                   muted
                   playsInline
@@ -192,7 +192,7 @@ function BannerPoint() {
         </motion.div>
 
         {/* Tab Buttons */}
-        <div className="flex gap-4">
+        <div className="flex gap-4 md:px-8 px-4">
           <AnimatePresence>
             {tabs.map((tab, index) => (
               <motion.button
@@ -204,7 +204,7 @@ function BannerPoint() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleTabClick(index)}
-                className={`flex-1 py-4 md:px-6 rounded-[16px] md:text-[24px] text-[14px] md:leading-[32px] leading-[20px] transition-all duration-300 ${
+                className={`flex-1 py-4 md:px-4 rounded-[16px] md:text-[24px] text-[14px] md:leading-[32px] leading-[20px] transition-all duration-300 ${
                   activeTab === index
                     ? "bg-gradient-to-r from-[#26B77D] to-[#00B0A7] text-white shadow-lg"
                     : "bg-[#2A2F2D] text-gray-300 hover:bg-[#3A3F3D]"

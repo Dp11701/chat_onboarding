@@ -18,6 +18,7 @@ import SliderComponent from "./SliderComponent";
 
 function Rating() {
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [showContent, setShowContent] = useState(false);
 
   const sliderRef = useRef<Slider>(null);
 
@@ -122,7 +123,7 @@ function Rating() {
           initial="hidden"
           animate="visible"
         >
-          <div className="w-full">
+          <div className="w-full h-full relative">
             {!animationComplete ? (
               <Lottie
                 animationData={previewAnimation}
@@ -132,55 +133,89 @@ function Rating() {
                 onComplete={handleAnimationComplete}
               />
             ) : (
-              <motion.div
-                className="flex flex-col items-center justify-center h-full"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="flex items-center justify-center w-[24vw]">
-                  <Image src={Laurel} alt="Laurel" />
-                </div>
-                <Typography className="text-[#E2E2E2] text-[32px] font-[600] leading-[48px] my-6 text-center">
-                  Available on
-                </Typography>
-
-                <div className="flex items-center justify-center gap-6">
-                  <button className="flex items-center gap-3 px-6 py-3 rounded-xl bg-[linear-gradient(to_bottom_left,_#2BB4A599_0%,_#2A373A99_100%)] backdrop-blur-sm transition-all duration-300">
+              <div className="relative w-full h-screen overflow-hidden">
+                {/* Laurel Image Animation */}
+                <motion.div
+                  className="absolute top-3/7 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center"
+                  initial={{ scale: 1.2, opacity: 0, y: 0 }}
+                  animate={{ scale: 1, y: "-35vh", opacity: 1 }}
+                  transition={{
+                    scale: { duration: 0.8, ease: easeOut },
+                    y: { duration: 1, delay: 0.8, ease: easeOut },
+                    opacity: { duration: 0.6 },
+                  }}
+                >
+                  <motion.div
+                    className="flex items-center justify-center"
+                    initial={{ width: "50vw" }}
+                    animate={{ width: "30vw" }}
+                    transition={{ duration: 0.6, delay: 1.4, ease: easeOut }}
+                  >
                     <Image
-                      src={AppStore}
-                      alt="App Store"
-                      width={40}
-                      height={40}
+                      src={Laurel}
+                      alt="Laurel"
+                      className="w-full h-auto"
                     />
-                    <div className="flex flex-col items-start">
-                      <span className="text-[#9E9E9F] text-sm">
-                        Download on the
-                      </span>
-                      <span className="text-white text-xl font-medium">
-                        App Store
-                      </span>
-                    </div>
-                  </button>
+                  </motion.div>
+                </motion.div>
 
-                  <button className="flex items-center gap-3 px-6 py-3 rounded-xl bg-[linear-gradient(to_bottom_left,_#2BB4A599_0%,_#2A373A99_100%)] backdrop-blur-sm transition-all duration-300">
-                    <Image
-                      src={GooglePlay}
-                      alt="Google Play"
-                      width={40}
-                      height={40}
-                    />
-                    <div className="flex flex-col items-start">
-                      <span className="text-[#9E9E9F] text-sm">Get it on</span>
-                      <span className="text-white text-xl font-medium">
-                        Google Play
-                      </span>
-                    </div>
-                  </button>
-                </div>
-                <SliderComponent slides={firstRowReviews} reverse={true} />
-                <SliderComponent slides={secondRowReviews} />
-              </motion.div>
+                {/* Main Content */}
+                <motion.div
+                  className="flex flex-col items-center justify-start h-full pt-32"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: easeOut,
+                    delay: 2.0, // xuất hiện sau khi Laurel đã hoàn toàn di chuyển
+                  }}
+                >
+                  <Typography className="text-[#E2E2E2] text-[32px] font-[600] leading-[48px] my-6 text-center">
+                    Available on
+                  </Typography>
+
+                  <div className="flex items-center justify-center gap-6">
+                    {/* App Store Button */}
+                    <button className="flex items-center gap-3 px-6 py-3 rounded-xl bg-[linear-gradient(to_bottom_left,_#2BB4A599_0%,_#2A373A99_100%)] backdrop-blur-sm">
+                      <Image
+                        src={AppStore}
+                        alt="App Store"
+                        width={40}
+                        height={40}
+                      />
+                      <div className="flex flex-col items-start">
+                        <span className="text-[#9E9E9F] text-sm">
+                          Download on the
+                        </span>
+                        <span className="text-white text-xl font-medium">
+                          App Store
+                        </span>
+                      </div>
+                    </button>
+
+                    {/* Google Play Button */}
+                    <button className="flex items-center gap-3 px-6 py-3 rounded-xl bg-[linear-gradient(to_bottom_left,_#2BB4A599_0%,_#2A373A99_100%)] backdrop-blur-sm">
+                      <Image
+                        src={GooglePlay}
+                        alt="Google Play"
+                        width={40}
+                        height={40}
+                      />
+                      <div className="flex flex-col items-start">
+                        <span className="text-[#9E9E9F] text-sm">
+                          Get it on
+                        </span>
+                        <span className="text-white text-xl font-medium">
+                          Google Play
+                        </span>
+                      </div>
+                    </button>
+                  </div>
+
+                  <SliderComponent slides={firstRowReviews} reverse />
+                  <SliderComponent slides={secondRowReviews} />
+                </motion.div>
+              </div>
             )}
           </div>
         </motion.div>

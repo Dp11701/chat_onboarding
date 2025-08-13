@@ -9,15 +9,15 @@ export const SlickCard: React.FC<SlickCardProps> = ({
   author,
 }) => {
   return (
-    <div className="flex flex-col  justify-center max-w-[506px] h-[220px] bg-[#1B1B1B] rounded-[20px] p-6">
-      <Typography className="text-white text-[20px] font-[600] leading-[32px] text-start">
+    <div className="flex flex-col  justify-center md:max-w-[506px] max-w-[320px] h-[220px] bg-[#1B1B1B] rounded-[20px] p-6">
+      <Typography className="text-white text-[16px] md:text-[20px] font-[600] md:leading-[32px] leading-[24px] text-start">
         {title}
       </Typography>
-      <Typography className=" text-[20px] font-[400] leading-[28px] text-[#E2E2E2] mt-4">
+      <Typography className=" text-[16px] md:text-[20px] font-[400] md:leading-[28px] leading-[24px] text-[#E2E2E2] mt-4">
         {content}
       </Typography>
       <div className="flex w-full items-center justify-between mt-4">
-        <Typography className="text-white text-[18px] font-[400] leading-[28px]">
+        <Typography className="text-white text-[16px] md:text-[18px] font-[400] md:leading-[28px] leading-[24px]">
           {author}
         </Typography>
         <div className="flex items-center gap-2">

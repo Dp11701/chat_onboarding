@@ -19,6 +19,7 @@ import BannerPoint from "@/components/content/BannerPoint";
 import Rating from "@/components/content/Rating";
 import { useMediaQuery } from "@mantine/hooks";
 import OnboardingMobile from "@/components/content/OnboardingMobile";
+import MobileLaurelIntro from "@/components/content/MobileLaurelIntro";
 
 export default function OnboardingPage() {
   // Animation variants for container
@@ -54,11 +55,20 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(1);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const handleNextStep = () => {
+    if (step === 3) {
+      window.open(
+        "https://apps.apple.com/ca/app/ai-chatbot-ask-me-anything/id1669513811",
+        "_blank"
+      );
+
+      setStep(1);
+      return;
+    }
     setStep(step + 1);
   };
 
   return (
-    <div className=" bg-[#0A0F0D] overflow-hidden">
+    <div className=" bg-[#0A0F0D] overflow-hidden h-screen flex flex-col justify-between">
       <div
         className={
           isMobile
@@ -216,7 +226,7 @@ export default function OnboardingPage() {
         )}
 
         {step === 2 && <BannerPoint />}
-        {step === 3 && <Rating />}
+        {step === 3 && (isMobile ? <MobileLaurelIntro /> : <Rating />)}
       </div>
     </div>
   );
