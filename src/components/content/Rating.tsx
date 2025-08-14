@@ -1,11 +1,8 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { easeOut } from "framer-motion";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 import Lottie from "lottie-react";
 import previewAnimation from "../../assets/jsons/preview.json";
@@ -13,14 +10,10 @@ import Laurel from "../../assets/images/Laurel.png";
 import { Typography } from "@mantine/core";
 import GooglePlay from "../../assets/icons/icGooglePlay.svg";
 import AppStore from "../../assets/icons/icAppStore.svg";
-import Star from "../../assets/icons/icStar.svg";
 import SliderComponent from "./SliderComponent";
 
 function Rating() {
   const [animationComplete, setAnimationComplete] = useState(false);
-  const [showContent, setShowContent] = useState(false);
-
-  const sliderRef = useRef<Slider>(null);
 
   // Split reviews into two rows
   const firstRowReviews = [
@@ -64,19 +57,6 @@ function Rating() {
       author: "Diana Prince",
     },
   ];
-
-  const settings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    fade: true,
-    cssEase: "ease-in-out",
-  };
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -136,9 +116,9 @@ function Rating() {
               <div className="relative w-full h-screen overflow-hidden">
                 {/* Laurel Image Animation */}
                 <motion.div
-                  className="absolute top-3/7 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center"
+                  className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-0 flex justify-center items-center"
                   initial={{ scale: 1.2, opacity: 0, y: 0 }}
-                  animate={{ scale: 1, y: "-35vh", opacity: 1 }}
+                  animate={{ scale: 1, y: "-0", opacity: 1 }}
                   transition={{
                     scale: { duration: 0.8, ease: easeOut },
                     y: { duration: 1, delay: 0.8, ease: easeOut },
