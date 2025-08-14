@@ -84,7 +84,7 @@ export default function ThreeStepAnim() {
               Available on
             </Typography>
 
-            <div className="flex items-center justify-center gap-6">
+            <div className="flex items-center justify-center gap-6 flex-col">
               <StoreButton
                 icon={AppStore}
                 labelTop="Download on the"
@@ -127,15 +127,21 @@ function StoreButton({
 }) {
   return (
     <motion.button
-      className="flex items-center gap-3 px-6 py-3 rounded-xl bg-[linear-gradient(to_bottom_left,_#2BB4A599_0%,_#2A373A99_100%)] backdrop-blur-sm"
+      className="flex items-center gap-3 px-2 py-3 rounded-xl bg-[linear-gradient(to_bottom_left,_#2BB4A599_0%,_#2A373A99_100%)] backdrop-blur-sm"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       transition={{ duration: 0.2 }}
     >
-      <Image src={icon} alt={labelBottom} width={40} height={40} />
-      <div className="flex flex-col items-start">
-        <span className="text-[#9E9E9F] text-sm">{labelTop}</span>
-        <span className="text-white text-xl font-medium">{labelBottom}</span>
+      <div className="flex items-start gap-2">
+        <Image src={icon} alt={labelBottom} width={40} height={40} />
+        <div className="flex flex-col items-start">
+          <span className="text-[#E2E2E2] text-[14px] leading-[20px] font-[400]">
+            {labelTop}
+          </span>
+          <span className="text-white text-[20px] leading-[32px] font-[600] mt-1">
+            {labelBottom}
+          </span>
+        </div>
       </div>
     </motion.button>
   );
