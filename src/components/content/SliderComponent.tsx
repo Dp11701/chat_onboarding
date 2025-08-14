@@ -33,7 +33,6 @@ const InfiniteLoopSlider: React.FC<InfiniteLoopSliderProps> = ({
     () => [...slides, ...slides, ...slides],
     [slides]
   );
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const containerRef = useRef<HTMLDivElement>(null);
   const motionRef = useRef<HTMLDivElement>(null);

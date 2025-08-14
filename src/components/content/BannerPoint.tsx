@@ -172,20 +172,22 @@ function BannerPoint() {
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
-                className="relative md:rounded-[56px] overflow-hidden md:border-2 md:border-[#212627] "
+                className="lg:max-h-[70vh] lg:w-auto flex justify-center items-center "
               >
-                <video
-                  className="w-[110%] h-[110%]  rounded-lg"
-                  autoPlay
-                  muted
-                  playsInline
-                  ref={(el) => {
-                    videoRefs.current[index] = el;
-                  }}
-                >
-                  <source src={slide.video} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <div className="relative md:rounded-[56px] overflow-hidden md:border-2 md:border-[#212627] lg:h-[70vh] lg:w-auto">
+                  <video
+                    className="w-full h-full object-cover rounded-lg"
+                    autoPlay
+                    muted
+                    playsInline
+                    ref={(el) => {
+                      videoRefs.current[index] = el;
+                    }}
+                  >
+                    <source src={slide.video} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
               </div>
             ))}
           </Slider>
