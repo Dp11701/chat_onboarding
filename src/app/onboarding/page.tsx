@@ -53,7 +53,6 @@ export default function OnboardingPage() {
   };
 
   const [step, setStep] = useState(1);
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const handleNextStep = () => {
     if (step === 3) {
@@ -70,16 +69,16 @@ export default function OnboardingPage() {
 
   return (
     <div className="bg-[#0A0F0D] overflow-hidden h-screen flex flex-co justify-between">
-      <div className="flex flex-col-reverse md:grid md:grid-cols-12 h-full bg-[#0A0F0D] overflow-hidden">
+      <div className="flex flex-col-reverse sm:grid sm:grid-cols-12 md:grid md:grid-cols-12 h-full bg-[#0A0F0D] overflow-hidden">
         {/* Left Column - Responsive layout với CSS */}
         <div
-          className="w-full md:col-span-4 bg-cover bg-center bg-no-repeat px-0 md:px-20 py-6 md:py-10 flex md:flex-col items-center justify-center"
+          className="w-full sm:col-span-5 md:col-span-4 bg-cover bg-center bg-no-repeat px-0 md:px-20 py-6 md:py-10 flex md:flex-col items-center justify-center"
           style={{ backgroundImage: `url(${BackGroundLeft.src})` }}
         >
           <div className="flex flex-col items-start justify-between md:h-[60vh]">
             {/* Logo - Hidden on mobile với CSS */}
             <div className="hidden md:flex lg:flex items-center mb-auto pt-4 justify-center gap-2">
-              <div className="bg-black rounded-xl p-3">
+              <div className="bg-transparent rounded-xl p-3">
                 <Image src={LogoIcon} alt="logo" width={36} height={36} />
               </div>
               <p className="text-[28px] leading-[32px] font-bold text-white tracking-tight">
@@ -88,7 +87,7 @@ export default function OnboardingPage() {
             </div>
 
             {/* Center Content */}
-            <div className="flex flex-col items-center md:items-center lg:items-center lg:justify-center w-full">
+            <div className="flex flex-col items-center md:items-center lg:items-center lg:justify-center w-full sm:mx-10">
               {/* Title */}
               <span className="text-[22px] md:text-[34px] leading-[34px] md:leading-[54px] text-white text-center font-bold mb-2">
                 {step === 1 && "Integrated All-In-One AI App Suite"}
@@ -104,7 +103,7 @@ export default function OnboardingPage() {
               {/* Button */}
               <button
                 onClick={handleNextStep}
-                className="relative flex items-center justify-center text-white font-medium !bg-gradient-to-r from-[#26B77D] to-[#00B0A7] md:px-3 px-[16px] py-3 md:py-5 rounded-[16px] shadow-[0_0_20px_#10A46940] min-w-[300px] md:min-w-[320px] w-[90vw] lg:w-auto md:w-auto"
+                className="relative flex items-center justify-center text-white font-medium !bg-gradient-to-r from-[#26B77D] to-[#00B0A7] md:px-2 px-[16px] py-3 md:py-5 rounded-[16px] shadow-[0_0_20px_#10A46940] min-w-[300px]  w-[90vw] lg:w-auto md:w-auto sm:w-auto"
               >
                 <span className="text-center font-600 text-[18px] md:text-[22px] leading-[28px] md:leading-[32px] w-full">
                   {step === 1 && "Get Started"}
@@ -189,7 +188,7 @@ export default function OnboardingPage() {
         </div>
 
         {/* Mobile Content - Hiển thị với CSS responsive */}
-        <div className=" md:hidden w-full flex items-center justify-center h-full">
+        <div className=" md:hidden lg:hidden sm:hidden w-full flex items-center justify-center h-full">
           {step === 1 && <OnboardingMobile />}
           {step === 2 && <BannerPoint />}
           {step === 3 && <MobileLaurelIntro />}
