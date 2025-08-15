@@ -90,7 +90,7 @@ export default function OnboardingPage() {
             <div className="flex flex-col items-center md:items-center lg:items-center lg:justify-center w-full sm:mx-10">
               {/* Title */}
               <span className="text-[22px] md:text-[34px] leading-[34px] md:leading-[54px] text-white text-center font-bold mb-2">
-                {step === 1 && "Integrated All-In-One AI App Suite"}
+                {step === 1 && "All-In-One AI App"}
                 {step === 2 && "Your Ultimate AI Tool or Work & Creativity"}
                 {step === 3 && "Join 25M+ using AI Chatbot daily"}
               </span>
