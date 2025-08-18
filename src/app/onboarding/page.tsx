@@ -66,6 +66,9 @@ export default function OnboardingPage() {
     }
     setStep(step + 1);
   };
+  const handleResetStep = () => {
+    setStep(1);
+  };
 
   return (
     <div className="bg-[#0A0F0D] overflow-hidden h-screen flex flex-co justify-between">
@@ -77,7 +80,10 @@ export default function OnboardingPage() {
         >
           <div className="flex flex-col items-start justify-center md:h-full relative">
             {/* Logo - Hidden on mobile với CSS */}
-            <div className="hidden md:flex lg:flex items-center mb-auto pt-4 justify-center gap-2 absolute top-0 left-0">
+            <div
+              className="hidden md:flex lg:flex items-center mb-auto pt-4 justify-center gap-2 absolute top-0 left-0"
+              onClick={handleResetStep}
+            >
               <div className="bg-transparent rounded-xl p-3">
                 <Image src={LogoIcon} alt="logo" width={36} height={36} />
               </div>
