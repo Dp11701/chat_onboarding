@@ -132,56 +132,90 @@ export default function OnboardingPage() {
         <div className="hidden md:block md:col-span-8">
           {step === 1 && (
             <motion.div
-              className="bg-transparent flex items-center py-20 flex-col overflow-y-auto gap-4 w-full h-[100vh]"
+              className="bg-transparent flex items-center py-20 flex-col overflow-y-auto gap-8 w-full h-[100vh]"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
               {/* row 1 */}
-              <div className="flex w-full gap-4 px-20">
-                <motion.div className="w-[39%] h-auto" variants={imageVariants}>
+              <div className="flex w-full gap-8 px-20">
+                <motion.div
+                  className="w-[39%] h-auto cursor-pointer"
+                  variants={imageVariants}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Image src={AILogo} alt="AI Logo" />
                 </motion.div>
-                <motion.div className="w-[61%] h-auto" variants={imageVariants}>
+                <motion.div
+                  className="w-[61%] h-auto cursor-pointer"
+                  variants={imageVariants}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Image src={AskWithPic} alt="Ask With Pic" />
                 </motion.div>
               </div>
 
               {/* row 2 */}
-              <div className="flex w-full gap-4 px-20">
-                <motion.div className="w-[50%] h-auto" variants={imageVariants}>
+              <div className="flex w-full gap-8 px-20">
+                <motion.div
+                  className="w-[50%] h-auto cursor-pointer"
+                  variants={imageVariants}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Image src={AIVoice} alt="AI Voice" />
                 </motion.div>
-                <motion.div className="w-[50%] h-auto" variants={imageVariants}>
+                <motion.div
+                  className="w-[50%] h-auto cursor-pointer"
+                  variants={imageVariants}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Image src={chatWithAI} alt="Chat With AI" />
                 </motion.div>
               </div>
 
               {/* row 3 */}
-              <div className="flex w-full gap-4 px-20">
+              <div className="flex w-full gap-8 px-20">
                 <motion.div
-                  className="w-[100%] h-auto"
+                  className="w-[100%] h-auto cursor-pointer"
                   variants={imageVariants}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Image src={topicChat} alt="Topic Chat" />
                 </motion.div>
               </div>
 
               {/* row 4 */}
-              <div className="flex w-full gap-4 px-20">
-                <motion.div className="w-[50%] h-auto" variants={imageVariants}>
+              <div className="flex w-full gap-8 px-20">
+                <motion.div
+                  className="w-[50%] h-auto cursor-pointer"
+                  variants={imageVariants}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Image src={webSearch} alt="Web Search" />
                 </motion.div>
-                <motion.div className="w-[50%] h-auto" variants={imageVariants}>
+                <motion.div
+                  className="w-[50%] h-auto cursor-pointer"
+                  variants={imageVariants}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <Image src={AIKeyboard} alt="AI Keyboard" />
                 </motion.div>
               </div>
 
               {/* row 5 */}
-              <div className="flex w-full gap-4 px-20">
+              <div className="flex w-full gap-8 px-20">
                 <motion.div
-                  className="w-[100%] h-auto"
+                  className="w-[100%] h-auto cursor-pointer"
                   variants={imageVariants}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <Image src={imageGenerate} alt="Image Generate" />
                 </motion.div>
