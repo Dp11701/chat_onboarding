@@ -81,8 +81,8 @@ export default function OnboardingPage() {
           <div className="flex flex-col items-start justify-center md:h-full relative">
             {/* Logo - Hidden on mobile với CSS */}
             <div
-              className="hidden md:flex lg:flex items-center mb-auto pt-4 justify-center gap-2 absolute top-0 left-0"
-              onClick={handleResetStep}
+              className="hidden md:flex lg:flex items-center mb-auto pt-4 justify-center gap-2 absolute top-0 left-0 cursor-pointer"
+              onClick={() => window.location.reload()}
             >
               <div className="bg-transparent rounded-xl p-3">
                 <Image src={LogoIcon} alt="logo" width={36} height={36} />
@@ -95,8 +95,8 @@ export default function OnboardingPage() {
             {/* Center Content */}
             <div className="flex flex-col items-center md:items-center lg:items-center lg:justify-center w-full">
               {/* Title */}
-              <span className="text-[22px] md:text-[34px] leading-[34px] md:leading-[54px] text-white text-center font-bold mb-2">
-                {step === 1 && "Integrated All-In-One AI App Suite"}
+              <span className="text-[22px] md:text-[34px] leading-[34px] md:leading-[54px] text-white text-center font-[600] mb-2">
+                {step === 1 && "All-In-One AI App"}
                 {step === 2 && "Your Ultimate AI Tool or Work & Creativity"}
                 {step === 3 && "Join 25M+ using AI Chatbot daily"}
               </span>
