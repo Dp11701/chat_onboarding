@@ -56,7 +56,7 @@ const SliderComponentMobile: React.FC<InfiniteLoopSliderProps> = ({
   return (
     <div
       ref={containerRef}
-      className="w-full overflow-hidden bg-transparent mt-10"
+      className="w-full overflow-hidden bg-transparent mb-10"
     >
       <motion.div
         ref={motionRef}

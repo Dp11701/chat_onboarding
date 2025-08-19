@@ -70,7 +70,7 @@ export default function ThreeStepAnim() {
         />
       ) : (
         <motion.div
-          className="flex flex-col items-center justify-center h-screen w-full overflow-hidden pt-32"
+          className="flex flex-col items-center justify-center  w-full overflow-hidden pt-32"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}

@@ -154,7 +154,7 @@ function BannerPoint() {
     <motion.div
       className={
         "bg-transparent flex items-center md:py-2 flex-col overflow-y-auto gap-4 w-full " +
-        (isMobile ? "pb-10" : "col-span-8 h-[100vh]")
+        (isMobile ? "" : "col-span-8 h-[100vh]")
       }
       variants={containerVariants}
       initial="hidden"
@@ -163,7 +163,7 @@ function BannerPoint() {
       <div className="md:max-w-4xl w-full  rounded-2xl md:p-8">
         {/* Slider Container */}
         <motion.div
-          className="relative mb-8 bg-[#0A0F0D] rounded-xl md:p-8 min-h-[400px] overflow-hidden"
+          className="relative bg-[#0A0F0D] rounded-xl md:p-8 min-h-[400px] overflow-hidden"
           variants={slideVariants}
           initial="hidden"
           animate="visible"
