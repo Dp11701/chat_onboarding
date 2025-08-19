@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { easeOut } from "framer-motion";
 import Image from "next/image";
@@ -11,9 +11,13 @@ import { Typography } from "@mantine/core";
 import GooglePlay from "../../assets/icons/icGooglePlay.svg";
 import AppStore from "../../assets/icons/icAppStore.svg";
 import SliderComponent from "./SliderComponent";
+import { trackingIntro } from "@/app/utils/FirebaseUtils";
 
 function Rating() {
   const [animationComplete, setAnimationComplete] = useState(false);
+  useEffect(() => {
+    trackingIntro("onb_3", "screen");
+  }, []);
 
   // Split reviews into two rows
   const firstRowReviews = [

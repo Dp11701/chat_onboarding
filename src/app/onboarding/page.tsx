@@ -20,6 +20,7 @@ import Rating from "@/components/content/Rating";
 import { useMediaQuery } from "@mantine/hooks";
 import OnboardingMobile from "@/components/content/OnboardingMobile";
 import MobileLaurelIntro from "@/components/content/MobileLaurelIntro";
+import { trackingIntro } from "../utils/FirebaseUtils";
 
 export default function OnboardingPage() {
   // Animation variants for container
@@ -53,9 +54,26 @@ export default function OnboardingPage() {
   };
 
   const [step, setStep] = useState(1);
+  useEffect(() => {
+    const trackEvent = async () => {
+      try {
+        await trackingIntro("onb_1", "screen");
+      } catch (error) {
+        console.error("Failed to track onb_1:", error);
+      }
+    };
+    trackEvent();
+  }, []);
 
-  const handleNextStep = () => {
+  const handleNextStep = async () => {
     if (step === 3) {
+      try {
+        await trackingIntro("to_store", "redirect");
+        console.log("Redirect tracking completed");
+      } catch (error) {
+        console.error("Failed to track to_store:", error);
+      }
+
       window.open(
         "https://apps.apple.com/ca/app/ai-chatbot-ask-me-anything/id1669513811",
         "_blank"
@@ -64,6 +82,7 @@ export default function OnboardingPage() {
       setStep(1);
       return;
     }
+
     setStep(step + 1);
   };
 

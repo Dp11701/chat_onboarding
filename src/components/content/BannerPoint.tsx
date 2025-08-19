@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useMediaQuery } from "@mantine/hooks";
+import { trackingIntro } from "@/app/utils/FirebaseUtils";
 
 function BannerPoint() {
   const [activeTab, setActiveTab] = useState(0);
@@ -20,6 +21,16 @@ function BannerPoint() {
     { id: "logo", label: "Logo Generate" },
     { id: "avatar", label: "AI Avatar" },
   ];
+  useEffect(() => {
+    const trackEvent = async () => {
+      try {
+        await trackingIntro("onb_2", "screen");
+      } catch (error) {
+        console.error("Failed to track onb_2:", error);
+      }
+    };
+    trackEvent();
+  }, []);
 
   const slides = [
     {

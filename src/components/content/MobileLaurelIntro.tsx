@@ -10,9 +10,20 @@ import AppStore from "../../assets/icons/icAppStore.svg";
 import { Typography } from "@mantine/core";
 import Lottie from "lottie-react";
 import previewAnimation from "../../assets/jsons/preview.json";
+import { trackingIntro } from "@/app/utils/FirebaseUtils";
 
 export default function ThreeStepAnim() {
   const [animationComplete, setAnimationComplete] = useState(false);
+  useEffect(() => {
+    const trackEvent = async () => {
+      try {
+        await trackingIntro("onb_3", "screen");
+      } catch (error) {
+        console.error("Failed to track onb_3:", error);
+      }
+    };
+    trackEvent();
+  }, []);
 
   const [phase, setPhase] = useState<
     "big" | "small" | "showStep2" | "showStep3"
