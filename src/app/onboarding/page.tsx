@@ -66,9 +66,6 @@ export default function OnboardingPage() {
     }
     setStep(step + 1);
   };
-  const handleResetStep = () => {
-    setStep(1);
-  };
 
   return (
     <div className="bg-[#0A0F0D] overflow-hidden h-screen flex flex-co justify-between">
@@ -95,21 +92,21 @@ export default function OnboardingPage() {
             {/* Center Content */}
             <div className="flex flex-col items-center md:items-center lg:items-center lg:justify-center w-full">
               {/* Title */}
-              <span className="text-[22px] md:text-[34px] leading-[34px] md:leading-[54px] text-white text-center font-[600] mb-2 px-2 md:px-0 mx-2 md:mx-0">
+              <span className="text-[22px] md:text-[28px] leading-[28px] md:leading-[45px] text-white text-center font-[600] mb-2 px-2 md:px-0 mx-2 md:mx-0">
                 {step === 1 && "All-In-One AI App"}
                 {step === 2 && "Your Ultimate AI Tool or Work & Creativity"}
                 {step === 3 && "Join 25M+ using AI Chatbot daily"}
               </span>
 
               {/* Subtitle */}
-              <p className="text-[18px] md:text-[28px] leading-[28px] md:leading-[45px] text-[#E2E2E2] text-center mb-4">
+              <p className="text-[18px] md:text-[24px] leading-[28px] md:leading-[36px] md:text-[#E2E2E2] text-center mb-4 text-[#9E9E9F]">
                 Chat, Speak, Design & More
               </p>
 
               {/* Button */}
               <button
                 onClick={handleNextStep}
-                className="relative flex items-center justify-center text-white font-medium !bg-gradient-to-r from-[#26B77D] to-[#00B0A7] md:px-2 px-[16px] py-3 md:py-5 rounded-[16px] shadow-[0_0_20px_#10A46940] min-w-[300px]  w-[90vw] lg:w-auto md:w-auto sm:w-auto sx-3 transition-transform duration-200 ease-out md:hover:scale-105 cursor-pointer"
+                className="sm:min-w-[200px] relative flex items-center justify-center text-white font-medium !bg-gradient-to-r from-[#26B77D] to-[#00B0A7] md:px-2 px-[16px] py-4 md:py-5 rounded-[16px] shadow-[0_0_20px_#10A46940] min-w-[300px]  w-[90vw] lg:w-auto sm:w-auto sx-3 transition-transform duration-200 ease-out md:hover:scale-105 cursor-pointer "
               >
                 <span className="text-center font-600 text-[18px] md:text-[22px] leading-[28px] md:leading-[32px] w-full">
                   {step === 1 && "Get Started"}
@@ -121,7 +118,7 @@ export default function OnboardingPage() {
                   alt="arrow-right"
                   width={28}
                   height={28}
-                  className="absolute right-4 top-1/2 -translate-y-1/2"
+                  className="absolute right-4 md:right-2 top-1/2 -translate-y-1/2"
                 />
               </button>
             </div>
@@ -132,13 +129,13 @@ export default function OnboardingPage() {
         <div className="hidden md:block md:col-span-8">
           {step === 1 && (
             <motion.div
-              className="bg-transparent flex items-center py-20 flex-col overflow-y-auto gap-8 w-full h-[100vh]"
+              className="bg-transparent flex items-center py-20 md:py-10 flex-col overflow-y-auto  gap-8 w-full h-[100vh] md:gap-4"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
               {/* row 1 */}
-              <div className="flex w-full gap-8 px-20">
+              <div className="flex w-full gap-8 md:gap-4 px-20 md:px-10">
                 <motion.div
                   className="w-[39%] h-auto cursor-pointer"
                   variants={imageVariants}
@@ -158,7 +155,7 @@ export default function OnboardingPage() {
               </div>
 
               {/* row 2 */}
-              <div className="flex w-full gap-8 px-20">
+              <div className="flex w-full gap-8 md:gap-4 px-20 md:px-10">
                 <motion.div
                   className="w-[50%] h-auto cursor-pointer"
                   variants={imageVariants}
@@ -178,7 +175,7 @@ export default function OnboardingPage() {
               </div>
 
               {/* row 3 */}
-              <div className="flex w-full gap-8 px-20">
+              <div className="flex w-full gap-8 md:gap-4 px-20 md:px-10">
                 <motion.div
                   className="w-[100%] h-auto cursor-pointer"
                   variants={imageVariants}
@@ -190,7 +187,7 @@ export default function OnboardingPage() {
               </div>
 
               {/* row 4 */}
-              <div className="flex w-full gap-8 px-20">
+              <div className="flex w-full gap-8 md:gap-4 px-20 md:px-10">
                 <motion.div
                   className="w-[50%] h-auto cursor-pointer"
                   variants={imageVariants}
@@ -210,7 +207,7 @@ export default function OnboardingPage() {
               </div>
 
               {/* row 5 */}
-              <div className="flex w-full gap-8 px-20">
+              <div className="flex w-full gap-8 md:gap-4  px-20 md:px-10">
                 <motion.div
                   className="w-[100%] h-auto cursor-pointer"
                   variants={imageVariants}

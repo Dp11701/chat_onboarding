@@ -154,7 +154,7 @@ function BannerPoint() {
     <motion.div
       className={
         "bg-transparent flex items-center md:py-2 flex-col overflow-y-auto gap-4 w-full " +
-        (isMobile ? "" : "col-span-8 h-[100vh]")
+        (isMobile ? "" : " h-[100vh] md:col-span-8")
       }
       variants={containerVariants}
       initial="hidden"
@@ -194,7 +194,7 @@ function BannerPoint() {
         </motion.div>
 
         {/* Tab Buttons */}
-        <div className="flex gap-4 md:px-8 px-4">
+        <div className="flex gap-4 md:gap-2 px-4 md:px-0 w-full lg:gap-4">
           <AnimatePresence>
             {tabs.map((tab, index) => (
               <motion.button
@@ -206,7 +206,7 @@ function BannerPoint() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleTabClick(index)}
-                className={`flex-1 py-4 md:px-4 rounded-[16px] md:text-[24px] text-[14px] md:leading-[32px] leading-[20px] transition-all duration-300 ${
+                className={`flex-1 py-4 md:px-2 rounded-[8px] lg:rounded-[16px] md:rounded-[16px] md:text-[20px] text-[14px] md:leading-[28px] leading-[20px] transition-all duration-300 ${
                   activeTab === index
                     ? "bg-gradient-to-r from-[#26B77D] to-[#00B0A7] text-white shadow-lg"
                     : "bg-[#2A2F2D] text-gray-300 hover:bg-[#3A3F3D]"
