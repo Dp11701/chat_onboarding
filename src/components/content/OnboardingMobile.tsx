@@ -71,7 +71,7 @@ export default function OnboardingMobile({
         <Slider {...settings}>
           {slides.map((slide, idx) => (
             <div key={idx} className="px-4">
-              <div className="bg-transparent rounded-[20px] p-5 flex flex-col items-center text-center">
+              <div className="bg-transparent rounded-[20px] p-10 flex flex-col items-center text-center">
                 <div className="w-full flex items-center justify-center">
                   <Image
                     src={slide.image}
