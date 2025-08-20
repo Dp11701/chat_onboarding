@@ -66,7 +66,9 @@ export default function OnboardingMobile({
   };
 
   return (
-    <div className={`onboarding-mobile-slider w-full ${className}`}>
+    <div
+      className={`onboarding-mobile-slider w-full overflow-y-hidden ${className}`}
+    >
       <div className="relative w-full">
         <Slider {...settings}>
           {slides.map((slide, idx) => (

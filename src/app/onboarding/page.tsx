@@ -21,6 +21,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import OnboardingMobile from "@/components/content/OnboardingMobile";
 import MobileLaurelIntro from "@/components/content/MobileLaurelIntro";
 import { trackingIntro } from "../utils/FirebaseUtils";
+import BannerPointMobile from "@/components/content/BannerPointMobile";
 
 export default function OnboardingPage() {
   // Animation variants for container
@@ -254,7 +255,7 @@ export default function OnboardingPage() {
         {/* Mobile Content - Hiển thị với CSS responsive */}
         <div className=" md:hidden lg:hidden sm:hidden w-full flex items-center justify-center h-full pb-[240px]">
           {step === 1 && <OnboardingMobile />}
-          {step === 2 && <BannerPoint />}
+          {step === 2 && <BannerPointMobile />}
           {step === 3 && <MobileLaurelIntro />}
         </div>
       </div>
