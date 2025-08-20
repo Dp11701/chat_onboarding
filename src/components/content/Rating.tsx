@@ -99,7 +99,7 @@ function Rating() {
       initial="hidden"
       animate="visible"
     >
-      <div className="max-w-[1200px] w-full rounded-2xl p-8 flex flex-col items-center justify-center">
+      <div className="w-full rounded-2xl p-8 flex flex-col items-center justify-center">
         {/* Lottie Animation Container */}
         <motion.div
           className="relative  bg-[#0A0F0D] rounded-xl p-8  overflow-hidden flex items-center justify-center"
@@ -145,7 +145,7 @@ function Rating() {
 
                 {/* Main Content */}
                 <motion.div
-                  className="flex flex-col items-center justify-start h-full lg:pt-50 md:pt-32 pt-10"
+                  className="flex flex-col items-center justify-start h-full lg:pt-[20vh] md:pt-32 pt-10"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
