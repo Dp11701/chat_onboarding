@@ -74,6 +74,14 @@ export default function OnboardingPage() {
         console.error("Failed to track to_store:", error);
       }
 
+      // Copy to clipboard
+      try {
+        await navigator.clipboard.writeText('{"isOnboarding":1}');
+        console.log('Copied to clipboard: {"isOnboarding":1}');
+      } catch (error) {
+        console.error("Failed to copy to clipboard:", error);
+      }
+
       window.open(
         "https://apps.apple.com/ca/app/ai-chatbot-ask-me-anything/id1669513811",
         "_blank"
