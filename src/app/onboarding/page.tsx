@@ -99,7 +99,7 @@ export default function OnboardingPage() {
       <div className="flex flex-col-reverse sm:grid sm:grid-cols-12 md:grid md:grid-cols-12 h-full bg-[#0A0F0D] overflow-hidden">
         {/* Left Column - Responsive layout với CSS */}
         <div
-          className="w-full sm:col-span-5 md:col-span-4 bg-cover bg-center bg-no-repeat px-0 md:px-20 py-6 md:py-10 flex md:flex-col items-center justify-center"
+          className="w-full sm:col-span-5 md:col-span-4 bg-cover bg-center bg-no-repeat px-0 md:px-20 py-6 md:py-10 flex md:flex-col items-center justify-center fixed bottom-0 left-0 right-0 md:relative md:bottom-auto md:left-auto md:right-auto z-10"
           style={{ backgroundImage: `url(${BackGroundLeft.src})` }}
         >
           <div className="flex flex-col items-start justify-center md:h-full relative">
@@ -252,7 +252,7 @@ export default function OnboardingPage() {
         </div>
 
         {/* Mobile Content - Hiển thị với CSS responsive */}
-        <div className=" md:hidden lg:hidden sm:hidden w-full flex items-center justify-center h-full">
+        <div className=" md:hidden lg:hidden sm:hidden w-full flex items-center justify-center h-full pb-[240px]">
           {step === 1 && <OnboardingMobile />}
           {step === 2 && <BannerPoint />}
           {step === 3 && <MobileLaurelIntro />}
