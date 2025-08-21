@@ -11,6 +11,11 @@ import { trackingIntro } from "@/app/utils/FirebaseUtils";
 
 function BannerPointMobile() {
   const [activeTab, setActiveTab] = useState(0);
+  const [videosLoaded, setVideosLoaded] = useState<boolean[]>([
+    false,
+    false,
+    false,
+  ]);
 
   const sliderRef = useRef<Slider>(null);
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
@@ -21,6 +26,7 @@ function BannerPointMobile() {
     { id: "logo", label: "Logo Generate" },
     { id: "avatar", label: "AI Avatar" },
   ];
+
   useEffect(() => {
     const trackEvent = async () => {
       try {
@@ -116,6 +122,14 @@ function BannerPointMobile() {
     },
   };
 
+  const handleVideoLoad = (index: number) => {
+    setVideosLoaded((prev) => {
+      const newState = [...prev];
+      newState[index] = true;
+      return newState;
+    });
+  };
+
   const handleTabClick = (index: number) => {
     setActiveTab(index);
     if (sliderRef.current) {
@@ -186,13 +200,27 @@ function BannerPointMobile() {
                 className="lg:max-h-[70vh] lg:w-auto flex justify-center items-center "
               >
                 <div className="relative md:rounded-[56px] overflow-hidden md:border-2 md:border-[#212627] lg:h-[70vh] lg:w-auto">
+                  {!videosLoaded[index] && (
+                    <div className="absolute inset-0 bg-gray-800 flex items-center justify-center rounded-lg">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+                    </div>
+                  )}
                   <video
                     className="w-full h-full object-cover rounded-lg"
-                    autoPlay
+                    autoPlay={index === 0}
                     muted
                     playsInline
+                    preload={
+                      index === 0 ? "auto" : index === 1 ? "metadata" : "none"
+                    }
+                    onLoadedData={() => handleVideoLoad(index)}
+                    onCanPlay={() => handleVideoLoad(index)}
                     ref={(el) => {
                       videoRefs.current[index] = el;
+                    }}
+                    style={{
+                      opacity: videosLoaded[index] ? 1 : 0,
+                      transition: "opacity 0.3s ease-in-out",
                     }}
                   >
                     <source src={slide.video} type="video/mp4" />
