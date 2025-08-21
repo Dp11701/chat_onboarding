@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, PanInfo } from "framer-motion";
 import { SlickCard } from "./SlickCard";
 
@@ -38,26 +38,47 @@ const SliderComponentMobile: React.FC<InfiniteLoopSliderProps> = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Tính dragConstraints sau khi render
-  useEffect(() => {
+  // Hàm tính toán constraints
+  const calculateConstraints = useCallback(() => {
     if (containerRef.current && motionRef.current) {
-      const containerWidth = containerRef.current.offsetWidth;
-      const contentWidth = motionRef.current.scrollWidth;
-      setConstraints({
-        left: -(contentWidth - containerWidth),
-        right: 0,
+      // Sử dụng requestAnimationFrame để đảm bảo DOM đã render
+      requestAnimationFrame(() => {
+        if (containerRef.current && motionRef.current) {
+          const containerWidth = containerRef.current.offsetWidth;
+          const contentWidth = motionRef.current.scrollWidth;
+          setConstraints({
+            left: -(contentWidth - containerWidth),
+            right: 0,
+          });
+        }
       });
     }
-  }, [slides, isMobile]);
+  }, []);
+
+  // Sử dụng ResizeObserver thay vì useEffect
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      // Throttle để tránh quá nhiều calculations
+      setTimeout(calculateConstraints, 50);
+    });
+
+    resizeObserver.observe(containerRef.current);
+
+    // Initial calculation
+    calculateConstraints();
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [calculateConstraints]);
 
   const handleDragStart = () => setIsDragging(true);
   const handleDragEnd = () => setIsDragging(false);
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full overflow-hidden bg-transparent mb-10"
-    >
+    <div ref={containerRef} className="overflow-hidden bg-transparent mb-10">
       <motion.div
         ref={motionRef}
         className="flex w-max gap-6 cursor-grab active:cursor-grabbing"

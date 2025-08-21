@@ -120,14 +120,14 @@ export default function OnboardingPage() {
             {/* Center Content */}
             <div className="flex flex-col items-center md:items-center lg:items-center lg:justify-center w-full">
               {/* Title */}
-              <span className="text-[22px] md:text-[28px] leading-[28px] md:leading-[45px] text-white text-center font-[600] mb-2 px-2 md:px-0 mx-2 md:mx-0">
+              <span className="text-[22px] md:text-[28px] leading-[28px] md:leading-[45px] text-white text-center font-[600] mb-4 px-2 md:px-0 mx-2 md:mx-0 ">
                 {step === 1 && "All-In-One AI App"}
-                {step === 2 && "Your Ultimate AI Tool or Work & Creativity"}
+                {step === 2 && "AI Tool for Work & Creativity"}
                 {step === 3 && "Join 25M+ using AI Chatbot daily"}
               </span>
 
               {/* Subtitle */}
-              <p className="text-[18px] md:text-[24px] leading-[28px] md:leading-[36px] md:text-[#E2E2E2] text-center mb-4 text-[#9E9E9F]">
+              <p className="text-[18px] md:text-[24px] leading-[28px] md:leading-[36px] md:text-[#E2E2E2] text-center mb-4 text-[#9E9E9F] md:block hidden">
                 Chat, Speak, Design & More
               </p>
 

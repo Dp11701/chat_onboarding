@@ -81,78 +81,82 @@ export default function ThreeStepAnim() {
         />
       ) : (
         <motion.div
-          className="flex flex-col items-center justify-center  w-full overflow-hidden pt-32"
+          className="w-full overflow-hidden pt-32 h-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Laurel Image */}
-          <motion.div
-            layout
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{
-              scale: phase === "big" ? 1 : 0.7,
-              y: phase === "big" ? 0 : -0,
-              opacity: 1,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 60,
-              damping: 20,
-            }}
-          >
-            <Image
-              src={Laurel}
-              alt="Laurel"
-              width={500}
-              height={500}
-              priority
-            />
-          </motion.div>
+          {/* LAUREL IMAGE - TÁCH RIÊNG VÀ ĐỘC LẬP */}
+          <div className="flex items-center justify-center">
+            <motion.div
+              layout
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{
+                scale: phase === "big" ? 1 : 0.7,
+                y: phase === "big" ? 0 : -0,
+                opacity: 1,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 60,
+                damping: 20,
+              }}
+            >
+              <Image
+                src={Laurel}
+                alt="Laurel"
+                width={500}
+                height={500}
+                // priority
+              />
+            </motion.div>
+          </div>
 
-          {/* Content */}
-          <AnimatePresence mode="wait">
-            {phase === "showStep2" && (
-              <motion.div
-                key="step2"
-                className="flex flex-col items-center justify-start"
-                initial={{ opacity: 0, y: 50, filter: "blur(8px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -40, filter: "blur(8px)" }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-              >
-                <Typography className="text-[#E2E2E2] text-[32px] font-[600] leading-[48px] my-6 text-center">
-                  Available on
-                </Typography>
+          {/* CONTENT - TÁCH HOÀN TOÀN RIÊNG */}
+          <div className="flex flex-col items-center justify-start">
+            <AnimatePresence mode="wait">
+              {phase === "showStep2" && (
+                <motion.div
+                  key="step2"
+                  className="flex flex-col items-center justify-start"
+                  initial={{ opacity: 0, y: 50, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -40, filter: "blur(8px)" }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                >
+                  <Typography className="text-[#E2E2E2] text-[32px] font-[600] leading-[48px] my-6 text-center">
+                    Available on
+                  </Typography>
 
-                <div className="flex items-center justify-center gap-6 flex-col">
-                  <StoreButton
-                    icon={AppStore}
-                    labelTop="Download on the"
-                    labelBottom="App Store"
-                  />
-                  <StoreButton
-                    icon={GooglePlay}
-                    labelTop="Get it on"
-                    labelBottom="Google Play"
-                  />
-                </div>
-              </motion.div>
-            )}
+                  <div className="flex items-center justify-center gap-6 flex-col">
+                    <StoreButton
+                      icon={AppStore}
+                      labelTop="Download on the"
+                      labelBottom="App Store"
+                    />
+                    <StoreButton
+                      icon={GooglePlay}
+                      labelTop="Get it on"
+                      labelBottom="Google Play"
+                    />
+                  </div>
+                </motion.div>
+              )}
 
-            {phase === "showStep3" && (
-              <motion.div
-                key="step3"
-                className="mt-6 w-full max-w-lg"
-                initial={{ opacity: 0, y: 50, filter: "blur(8px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -40, filter: "blur(8px)" }}
-                transition={{ duration: 0.8, ease: "easeInOut" }}
-              >
-                <SliderComponentMobile slides={firstRowReviews} />
-              </motion.div>
-            )}
-          </AnimatePresence>
+              {phase === "showStep3" && (
+                <motion.div
+                  key="step3"
+                  className="mt-6 w-full max-w-lg"
+                  initial={{ opacity: 0, y: 50, filter: "blur(8px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -40, filter: "blur(8px)" }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                >
+                  <SliderComponentMobile slides={firstRowReviews} />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </motion.div>
       )}
     </div>
