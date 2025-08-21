@@ -77,8 +77,12 @@ export default function OnboardingPage() {
 
       // Copy to clipboard
       try {
-        await navigator.clipboard.writeText('{"isOnboarding":1}');
-        console.log('Copied to clipboard: {"isOnboarding":1}');
+        const clipboardData = {
+          isOnboarding: 1,
+          createdAt: new Date().toISOString(),
+        };
+        await navigator.clipboard.writeText(JSON.stringify(clipboardData));
+        console.log("Copied to clipboard:", JSON.stringify(clipboardData));
       } catch (error) {
         console.error("Failed to copy to clipboard:", error);
       }
